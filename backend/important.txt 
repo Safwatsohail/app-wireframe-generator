@@ -1,0 +1,33 @@
+cd "/Users/safwatsohail/trusity internship /backend"
+uvicorn main:app --reload 
+
+These are HTTP status codes. They're split into groups by the first digit:
+
+**2xx — Success**
+- `200` OK — request worked, here's your data
+- `201` Created — something was created (e.g. POST to make a new user)
+- `204` No Content — worked, but nothing to return
+
+**3xx — Redirects**
+- `301` Moved Permanently — URL changed forever, use the new one
+- `302` Found — temporary redirect
+- `304` Not Modified — cached version is still valid, don't re-download
+
+**4xx — Client errors (you did something wrong)**
+- `400` Bad Request — your request is malformed or missing data
+- `401` Unauthorized — you're not logged in / no valid token
+- `403` Forbidden — you're logged in but don't have permission
+- `404` Not Found — that route/resource doesn't exist
+- `405` Method Not Allowed — you used GET but it only accepts POST, etc.
+- `408` Request Timeout — took too long to send the request
+- `409` Conflict — clash with current state (e.g. trying to create a user with an email that already exists)
+- `422` Unprocessable Entity — FastAPI uses this a lot — request format is right but the data inside fails validation
+- `429` Too Many Requests — rate limited, slow down
+
+**5xx — Server errors (the server did something wrong)**
+- `500` Internal Server Error — generic crash, something broke on the server
+- `502` Bad Gateway — server got a bad response from an upstream service
+- `503` Service Unavailable — server is down or overloaded
+- `504` Gateway Timeout — upstream service took too long to respond
+
+The ones most relevant to your app are `401` (bad API key), `429` (rate limited), `503` (model down), and `422` (FastAPI validation failed on your request body).
